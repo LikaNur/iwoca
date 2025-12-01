@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SingleApplication from "../SingleApplication";
-import { getSingleApplicationFixture } from "../../__fixtures__/applications.fixture";
 import styles from "./Applications.module.css";
 import { IApplication } from "./ApplicationsTypes";
 
 const Applications = () => {
-  const applications: IApplication[] = getSingleApplicationFixture;
+  const [applications, setApplications] = useState<IApplication[]>([]);
+
+  const fetchApplications = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/applications");
+      if (!response.ok) {
+        throw new Error(`Failed to fetch applications: ${response.statusText}`);
+      }
+      const data: IApplication[] = await response.json();
+      setApplications(data);
+    } catch (err) {
+      console.error("Error fetching applications:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchApplications();
+  }, []);
 
   return (
     <div className={styles.Applications}>
-      <SingleApplication application={applications[0]} />
+      {applications.map((application) => (
+        <SingleApplication key={application.guid} application={application} />
+      ))}
     </div>
   );
 };
