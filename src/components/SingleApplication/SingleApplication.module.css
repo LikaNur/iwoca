@@ -1,23 +1,118 @@
 .SingleApplication {
   display: grid;
-  grid-template-columns: 15% 15% auto 15% 15% 15%;
-  padding: 20px;
-
-  background-color: white;
-  box-shadow: 0px 5px 16px 0px rgba(173, 200, 215, 0.25);
-  border-radius: 10px;
+  grid-template-columns: 20% 12% auto 12% 12% 12%;
+  padding: 20px 24px;
+  background-color: #FFFFFF;
+  border: 1px solid #DDE8EE;
+  border-radius: 16px;
   margin-bottom: 1rem;
-}
-
-.cell {
-  text-align: left;
-  border-right: 1px solid #eee;
-  padding: 0 15px;
+  box-sizing: border-box;
+  gap: 24px;
+  min-width: 0;
 }
 
 .cell sub {
   display: block;
-  font-size: 0.8rem;
-  color: #999;
-  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0px;
+  text-align: start;
+  color: #737373;
+  margin-bottom: 8px;
+}
+
+.dataValue {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: start;
+  color: #0C2340;
+  display: block;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.email {
+  color: #246AC1;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1440px) {
+  .SingleApplication {
+    width: 100%;
+    max-width: 1152px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .SingleApplication {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    height: auto;
+    min-height: 80px;
+  }
+
+  .cell {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+  }
+
+  .cell:nth-child(2n) {
+    border-bottom: 1px solid #e0e0e0;
+  }
+}
+
+@media (max-width: 768px) {
+  .SingleApplication {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .cell {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 0;
+  }
+
+  .cell:last-child {
+    border-bottom: none;
+  }
+
+  .cell sub {
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .SingleApplication {
+    padding: 12px;
+    margin-bottom: 0.75rem;
+  }
+
+  .cell {
+    padding: 10px 0;
+  }
+
+  .cell sub {
+    font-size: 0.7rem;
+  }
 }

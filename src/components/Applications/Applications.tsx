@@ -68,8 +68,17 @@ const Applications = () => {
 
   return (
     <div className={styles.Applications}>
-      {isLoading && (
-        <div className={styles.loading}>Loading applications...</div>
+      {isLoading && applications.length === 0 && (
+        <div className={styles.loading}>
+          <div className={styles.spinner}></div>
+          <div className={styles.loadingText}>Loading applications...</div>
+        </div>
+      )}
+      {isLoading && applications.length > 0 && (
+        <div className={styles.loading}>
+          <div className={styles.spinner}></div>
+          <div className={styles.loadingText}>Loading more...</div>
+        </div>
       )}
       {applications.map((application) => (
         <SingleApplication key={application.id || application.guid} application={application} />

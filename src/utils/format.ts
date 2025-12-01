@@ -7,12 +7,11 @@ export function formatCurrency(amount: number): string {
   }).format(amount);
 }
 
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(date);
+export function formatDate(dateString: string | Date): string {
+  const date = dateString instanceof Date ? dateString : new Date(dateString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
 }
 

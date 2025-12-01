@@ -1,5 +1,5 @@
 .button {
-  background-color: var(--color-denim-15);
+  background-color: #0C2340;
   border: 2px solid transparent;
   line-height: 24px;
   border-radius: 8px;
@@ -9,6 +9,12 @@
   text-align: center;
   white-space: nowrap;
   transition: background-color 0.3s;
+  width: 200px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .button:focus {
@@ -17,17 +23,33 @@
 }
 
 .button:hover:not(:disabled) {
-  background-color: var(--color-denim-30);
+  background-color: #0a1a2e;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .button:active {
-  background-color: var(--color-denim-25);
+  background-color: #081420;
   box-shadow: inset 0px 0px 15px rgba(12, 35, 64, 0.4);
   transition: box-shadow 0.3s;
 }
 
 .button:disabled {
   opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 200px;
+  }
 }
