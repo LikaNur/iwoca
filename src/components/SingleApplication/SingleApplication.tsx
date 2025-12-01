@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
 import { IApplication } from "../Applications/ApplicationsTypes";
+import { formatCurrency, formatDate } from "../../utils/format";
 
 interface SingleApplicationProps {
   application: IApplication;
@@ -23,15 +24,15 @@ const SingleApplication: React.FC<SingleApplicationProps> = ({ application }) =>
       </div>
       <div className={styles.cell}>
         <sub>Loan Amount</sub>
-        {application.loan_amount}
+        {formatCurrency(application.loan_amount)}
       </div>
       <div className={styles.cell}>
         <sub>Application Date</sub>
-        {application.date_created}
+        {formatDate(application.date_created)}
       </div>
       <div className={styles.cell}>
         <sub>Expiry date</sub>
-        {application.expiry_date}
+        {formatDate(application.expiry_date)}
       </div>
     </div>
   );
