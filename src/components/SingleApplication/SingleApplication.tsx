@@ -1,19 +1,9 @@
 import React from "react";
 import styles from "./SingleApplication.module.css";
-
-interface Application {
-  guid: string;
-  loan_amount: number;
-  first_name: string;
-  last_name: string;
-  company: string;
-  email: string;
-  date_created: string;
-  expiry_date: string;
-}
+import { IApplication } from "../Applications/ApplicationsTypes";
 
 interface SingleApplicationProps {
-  application: Application;
+  application: IApplication;
 }
 
 const SingleApplication: React.FC<SingleApplicationProps> = ({ application }) => {
