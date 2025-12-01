@@ -8,7 +8,15 @@ const Applications = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const limit = 5;
+
+  const parseLinkHeader = (linkHeader: string | null): { hasNext: boolean } => {
+    if (!linkHeader) return { hasNext: false };
+    
+    const hasNext = /rel=["']next["']/.test(linkHeader);
+    return { hasNext };
+  };
 
   const fetchApplications = async (page: number) => {
     setIsLoading(true);
@@ -21,14 +29,19 @@ const Applications = () => {
         throw new Error(`Failed to fetch applications: ${response.statusText}`);
       }
       const data: IApplication[] = await response.json();
+      const linkHeader = response.headers.get("Link");
+      const { hasNext } = parseLinkHeader(linkHeader);
       
       if (page === 1) {
         setApplications(data);
       } else {
         setApplications((prev) => [...prev, ...data]);
       }
+      
+      setHasMore(hasNext);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
+      setHasMore(false);
     } finally {
       setIsLoading(false);
     }
