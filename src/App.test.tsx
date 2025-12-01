@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { describe, it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders "Application Portal" title', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Application portal/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+  it('renders "Application Portal" title', () => {
+    render(<App />);
+    const titleElement = screen.getByText(/Application Portal/i);
+    expect(titleElement).toBeInTheDocument();
+  });
 });
