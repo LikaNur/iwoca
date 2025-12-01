@@ -7,17 +7,26 @@ const Applications = () => {
   const [applications, setApplications] = useState<IApplication[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 5;
 
-  const fetchApplications = async () => {
+  const fetchApplications = async (page: number) => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://localhost:3001/api/applications");
+      const response = await fetch(
+        `http://localhost:3001/api/applications?_page=${page}&_limit=${limit}`
+      );
       if (!response.ok) {
         throw new Error(`Failed to fetch applications: ${response.statusText}`);
       }
       const data: IApplication[] = await response.json();
-      setApplications(data);
+      
+      if (page === 1) {
+        setApplications(data);
+      } else {
+        setApplications((prev) => [...prev, ...data]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -26,7 +35,7 @@ const Applications = () => {
   };
 
   useEffect(() => {
-    fetchApplications();
+    fetchApplications(1);
   }, []);
 
   if (error && applications.length === 0) {
