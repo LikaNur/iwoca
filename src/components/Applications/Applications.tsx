@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SingleApplication from "../SingleApplication";
+import { Button } from "../../ui/Button/Button";
 import styles from "./Applications.module.css";
 import { IApplication } from "./ApplicationsTypes";
 
@@ -59,16 +60,27 @@ const Applications = () => {
     );
   }
 
+  const handleLoadMore = () => {
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+    fetchApplications(nextPage);
+  };
+
   return (
     <div className={styles.Applications}>
       {isLoading && (
         <div className={styles.loading}>Loading applications...</div>
       )}
       {applications.map((application) => (
-        <SingleApplication key={application.guid} application={application} />
+        <SingleApplication key={application.id || application.guid} application={application} />
       ))}
       {error && applications.length > 0 && (
         <div className={styles.error}>Error loading applications: {error}</div>
+      )}
+      {hasMore && !isLoading && (
+        <div className={styles.loadMoreContainer}>
+          <Button onClick={handleLoadMore}>Load More</Button>
+        </div>
       )}
     </div>
   );
